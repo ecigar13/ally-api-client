@@ -30,9 +30,9 @@ public class APICallsTest {
         String balances = APICall.getAccountBalances(ResponseFormat.XML);
         String byID = APICall.getAccountByID(ResponseFormat.XML, "myId");
 
-        assertEquals(accounts, "https://api.tradeking.com/v1/accounts.xml");
-        assertEquals(balances, "https://api.tradeking.com/v1/accounts/balances.xml");
-        assertEquals(byID, "https://api.tradeking.com/v1/accounts/myId.xml");
+        assertEquals(accounts, APICall.TK_HOST + "accounts.xml");
+        assertEquals(balances, APICall.TK_HOST + "accounts/balances.xml");
+        assertEquals(byID, APICall.TK_HOST + "accounts/myId.xml");
     }
 
     @Test
@@ -41,9 +41,9 @@ public class APICallsTest {
         String postOrder = APICall.postOrderByAccountID(ResponseFormat.XML, "myId");
         String preview = APICall.postOrderByAccountIDPreview(ResponseFormat.XML, "myId");
 
-        assertEquals(orderByID, "https://api.tradeking.com/v1/accounts/myId/orders.xml");
-        assertEquals(postOrder, "https://api.tradeking.com/v1/accounts/myId/orders.xml");
-        assertEquals(preview, "https://api.tradeking.com/v1/accounts/myId/orders/preview.xml");
+        assertEquals(orderByID, APICall.TK_HOST + "accounts/myId/orders.xml");
+        assertEquals(postOrder, APICall.TK_HOST + "accounts/myId/orders.xml");
+        assertEquals(preview, APICall.TK_HOST + "accounts/myId/orders/preview.xml");
     }
 
     @Test
@@ -58,34 +58,34 @@ public class APICallsTest {
         String timeSales = APICall.getTimeSales(ResponseFormat.XML);
         String gainers = APICall.getTopList(TopList.GAINERS_ACTIVE, ResponseFormat.XML);
 
-        assertEquals(clock, "https://api.tradeking.com/v1/market/clock.xml");
-        assertEquals(quote, "https://api.tradeking.com/v1/market/ext/quotes.xml");
-        assertEquals(newsSearch, "https://api.tradeking.com/v1/market/news/search.xml");
+        assertEquals(clock, APICall.TK_HOST + "market/clock.xml");
+        assertEquals(quote, APICall.TK_HOST + "market/ext/quotes.xml");
+        assertEquals(newsSearch, APICall.TK_HOST + "market/news/search.xml");
         assertEquals(
                 news,
-                "https://api.tradeking.com/v1/market/news/234899d5fd2ee9a501a8349a0f571f6f.xml");
-        assertEquals(optionsSearch, "https://api.tradeking.com/v1/market/options/search.xml");
-        assertEquals(optionStrikes, "https://api.tradeking.com/v1/market/options/strikes.xml");
+                APICall.TK_HOST + "market/news/234899d5fd2ee9a501a8349a0f571f6f.xml");
+        assertEquals(optionsSearch, APICall.TK_HOST + "market/options/search.xml");
+        assertEquals(optionStrikes, APICall.TK_HOST + "market/options/strikes.xml");
         assertEquals(
-                optionExpirations, "https://api.tradeking.com/v1/market/options/expirations.xml");
-        assertEquals(timeSales, "https://api.tradeking.com/v1/market/timesales.xml");
+                optionExpirations, APICall.TK_HOST + "market/options/expirations.xml");
+        assertEquals(timeSales, APICall.TK_HOST + "market/timesales.xml");
         assertEquals(
                 gainers,
-                "https://api.tradeking.com/v1/market/toplists/topactivegainersbydollarvalue.xml");
+                APICall.TK_HOST + "market/toplists/topactivegainersbydollarvalue.xml");
     }
 
     @Test
     public void memberTest() {
         String member = APICall.getMemberProfile(ResponseFormat.XML);
-        assertEquals(member, "https://api.tradeking.com/v1/member/profile.xml");
+        assertEquals(member, APICall.TK_HOST + "member/profile.xml");
     }
 
     @Test
     public void utilityTest() {
         String status = APICall.getTKStatus(ResponseFormat.XML);
         String version = APICall.getTKVersion(ResponseFormat.XML);
-        assertEquals(status, "https://api.tradeking.com/v1/utility/status.xml");
-        assertEquals(version, "https://api.tradeking.com/v1/utility/version.xml");
+        assertEquals(status, APICall.TK_HOST + "utility/status.xml");
+        assertEquals(version, APICall.TK_HOST + "utility/version.xml");
     }
 
     @Test
@@ -98,12 +98,12 @@ public class APICallsTest {
         String deleteSymbolWatchList =
                 APICall.deleteSymbolFromWatchList("myId", "sym", ResponseFormat.XML);
 
-        assertEquals(watchlists, "https://api.tradeking.com/v1/watchlists.xml");
-        assertEquals(postWatchlists, "https://api.tradeking.com/v1/watchlists.xml");
-        assertEquals(getWatchlistsId, "https://api.tradeking.com/v1/watchlists/myId.xml");
-        assertEquals(deleteWatchlistsId, "https://api.tradeking.com/v1/watchlists/myId.xml");
+        assertEquals(watchlists, APICall.TK_HOST + "watchlists.xml");
+        assertEquals(postWatchlists, APICall.TK_HOST + "watchlists.xml");
+        assertEquals(getWatchlistsId, APICall.TK_HOST + "watchlists/myId.xml");
+        assertEquals(deleteWatchlistsId, APICall.TK_HOST + "watchlists/myId.xml");
         assertEquals(
-                getWatchlistsSymbol, "https://api.tradeking.com/v1/watchlist/myId/symbols.xml");
-        assertEquals(deleteSymbolWatchList, "https://api.tradeking.com/v1/watchlists/myId/sym.xml");
+                getWatchlistsSymbol, APICall.TK_HOST + "watchlist/myId/symbols.xml");
+        assertEquals(deleteSymbolWatchList, APICall.TK_HOST + "watchlists/myId/sym.xml");
     }
 }
