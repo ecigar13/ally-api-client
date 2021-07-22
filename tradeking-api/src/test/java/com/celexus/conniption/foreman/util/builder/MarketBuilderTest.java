@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 
 public class MarketBuilderTest {
@@ -16,7 +17,7 @@ public class MarketBuilderTest {
 		APIBuilder b = MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { "SIRI" }, null, null);
 		assertTrue(!b.getParameters().isEmpty());
 		assertNotNull("Required Parameter 'symbols' not found", b.getParameters().get("symbols"));
-		assertEquals("Resource URL different", "https://api.tradeking.com/v1/market/ext/quotes.xml",
+		assertEquals("Resource URL different", APICall.TK_HOST + "market/ext/quotes.xml",
 				b.getResourceURL());
 	}
 
@@ -24,6 +25,6 @@ public class MarketBuilderTest {
 	public void getClockTest() {
 		APIBuilder b = MarketBuilder.getClock(ResponseFormat.XML);
 		assertTrue(b.getParameters().isEmpty());
-		assertEquals("Resource URL Different", "https://api.tradeking.com/v1/market/clock.xml", b.getResourceURL());
+		assertEquals("Resource URL Different", APICall.TK_HOST + "market/clock.xml", b.getResourceURL());
 	}
 }

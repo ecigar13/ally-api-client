@@ -8,6 +8,7 @@ import java.util.concurrent.Future;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.stream.StreamHandler;
@@ -19,6 +20,7 @@ import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
 import com.celexus.conniption.model.accounts.AccountsResponse;
 import com.celexus.conniption.model.clock.ClockResponse;
+import com.celexus.conniption.model.fixml.*;
 import com.celexus.conniption.model.order.OrderResponse;
 import com.celexus.conniption.model.orders.OrdersResponse;
 import com.celexus.conniption.model.quotes.Quote;
@@ -169,6 +171,11 @@ public class TradeKing {
 
 		//get clock
 		TradeKing tk = new TradeKing(new TradeKingForeman());
+    testOrder(tk);
+    if (true) {
+      return;
+    }
+
 		ClockResponse c = tk.clock();
 		System.out.println(c.getElapsedtime());
 
@@ -209,25 +216,30 @@ public class TradeKing {
 		// List<Quote> qList = future.get();
 		// for (Quote qu : qList)
 		// System.out.println(qu.getSymbol() + " : " + qu.getBid());
+  }
 
-		/*
-		 * FIXMLBuilder fixml = new FIXMLBuilder().
-		 * id(ForemanConstants.TK_ACCOUNT_NO.toString())
-		 * .timeInForce(TimeInForceField.DAY_ORDER) .symbol("TWTR")
-		 * .priceType(PriceType.LIMIT) .securityType(SecurityType.STOCK) .quantity(1)
-		 * .executionPrice(.01) .side(MarketSideField.BUY);
-		 * System.err.println(fixml.build().toString()); Order o =
-		 * tk.preview(ForemanConstants.TK_ACCOUNT_NO.toString(),
-		 * fixml.build().toString()); log(o);
-		 * 
-		 * Clock c = tk.clock(); log(c);
-		 * 
-		 * Accounts a = tk.accounts(); log(a);
-		 * 
-		 * Quotes q = tk.quotes("TWTR", "XIV"); log(q);
-		 * 
-		 * Future f = tk.quotes(handler, "TWTR", "XIV"); wait(f, 15000L);
-		 */
+  static void testOrder(TradeKing tk) {
+		FIXMLBuilder fixml = new FIXMLBuilder()
+			.id(ForemanConstants.TK_ACCOUNT_NO.toString())
+			.timeInForce(TimeInForceField.DAY_ORDER)
+      .symbol("TWTR")
+			.priceType(PriceType.LIMIT)
+      .securityType(SecurityType.STOCK)
+      .quantity(1)
+			.executionPrice(.01)
+      .side(MarketSideField.BUY);
+    String payload = fixml.build().toString();
+		System.err.println(payload);
+    OrderResponse o = tk.preview(ForemanConstants.TK_ACCOUNT_NO.toString(), payload);
+    log(o);
+		
+		ClockResponse c = tk.clock(); log(c);
+		
+		AccountsResponse a = tk.accounts(); log(a);
+		
+		QuotesResponse q = tk.quotes(new String[] {"TWTR", "XIV"}); log(q);
+		
+		// Future f = tk.quotes(handler, "TWTR", "XIV"); wait(f, 15000L);
 	}
 
 	/**

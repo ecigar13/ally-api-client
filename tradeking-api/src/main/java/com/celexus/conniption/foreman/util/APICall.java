@@ -30,6 +30,7 @@ import com.github.scribejava.core.model.Verb;
 public class APICall implements Serializable {
 
     private static final long serialVersionUID = -3600236076708483532L;
+    public  static final String TK_HOST = "https://devapi.invest.ally.com/v1/";  // "https://api.tradeking.com/v1/";
 
     /**
      * This call will return detailed balance and holding information for each
@@ -103,12 +104,12 @@ public class APICall implements Serializable {
     }
 
     public enum Accounts {
-        ACCOUNTS("https://api.tradeking.com/v1/accounts", "."),
-        ACCOUNTS_BALANCES("https://api.tradeking.com/v1/accounts/balances", "."),
-        ID("https://api.tradeking.com/v1/accounts/", "."),
-        ID_BALANCES("https://api.tradeking.com/v1/accounts/", "/balances", "", "", ""),
-        ID_HISTORY("https://api.tradeking.com/v1/accounts/", "/history", "."),
-        ID_HOLDINGS("https://api.tradeking.com/v1/accounts/", "/holdings", ".");
+        ACCOUNTS(TK_HOST + "accounts", "."),
+        ACCOUNTS_BALANCES(TK_HOST + "accounts/balances", "."),
+        ID(TK_HOST + "accounts/", "."),
+        ID_BALANCES(TK_HOST + "accounts/", "/balances", "", "", ""),
+        ID_HISTORY(TK_HOST + "accounts/", "/history", "."),
+        ID_HOLDINGS(TK_HOST + "accounts/", "/holdings", ".");
 
         private String[] urlStrings;
 
@@ -169,10 +170,10 @@ public class APICall implements Serializable {
     }
 
     public enum ORDER_TRADES {
-        GET_ID_ORDERS(Verb.GET, "https://api.tradeking.com/v1/accounts/", "/orders", "."),
-        POST_ID_ORDERS(Verb.POST, "https://api.tradeking.com/v1/accounts/", "/orders", "."),
+        GET_ID_ORDERS(Verb.GET, TK_HOST + "accounts/", "/orders", "."),
+        POST_ID_ORDERS(Verb.POST, TK_HOST + "accounts/", "/orders", "."),
         POST_ID_ORDERS_PREVIEW(
-                Verb.POST, "https://api.tradeking.com/v1/accounts/", "/orders/preview", ".");
+                Verb.POST, TK_HOST + "accounts/", "/orders/preview", ".");
 
         private Verb v;
         private String[] urlStrings;
@@ -301,25 +302,25 @@ public class APICall implements Serializable {
     }
 
     public enum MARKET {
-        CLOCK("https://api.tradeking.com/v1/market/clock", "."),
-        EXT_QUOTES("https://api.tradeking.com/v1/market/ext/quotes", "."),
+        CLOCK(TK_HOST + "market/clock", "."),
+        EXT_QUOTES(TK_HOST + "market/ext/quotes", "."),
         STREAM_EXT_QUOTES("https://stream.tradeking.com/v1/market/quotes", "."),
-        NEWS_SEARCH("https://api.tradeking.com/v1/market/news/search", "."),
-        NEWS_ID("https://api.tradeking.com/v1/market/news/", "", "."),
-        OPTIONS_SEARCH("https://api.tradeking.com/v1/market/options/search", "."),
-        OPTIONS_STRIKES("https://api.tradeking.com/v1/market/options/strikes", "."),
-        OPTIONS_EXPIRATIONS("https://api.tradeking.com/v1/market/options/expirations", "."),
-        TIMESALES("https://api.tradeking.com/v1/market/timesales", "."),
-        TOPLISTS_VOLUME("https://api.tradeking.com/v1/market/toplists/topvolume", "."),
-        TOPLISTS_LOSERS_DOLLAR("https://api.tradeking.com/v1/market/toplists/toplosers", "."),
+        NEWS_SEARCH(TK_HOST + "market/news/search", "."),
+        NEWS_ID(TK_HOST + "market/news/", "", "."),
+        OPTIONS_SEARCH(TK_HOST + "market/options/search", "."),
+        OPTIONS_STRIKES(TK_HOST + "market/options/strikes", "."),
+        OPTIONS_EXPIRATIONS(TK_HOST + "market/options/expirations", "."),
+        TIMESALES(TK_HOST + "market/timesales", "."),
+        TOPLISTS_VOLUME(TK_HOST + "market/toplists/topvolume", "."),
+        TOPLISTS_LOSERS_DOLLAR(TK_HOST + "market/toplists/toplosers", "."),
         TOPLISTS_LOSERS_PERCENTAGE(
-                "https://api.tradeking.com/v1/market/toplists/toppctlosers", "."),
-        TOPLISTS_ACTIVE("https://api.tradeking.com/v1/market/toplists/topactive", "."),
-        TOPLISTS_GAINERS_DOLLAR_AMT("https://api.tradeking.com/v1/market/toplists/topgainers", "."),
+                TK_HOST + "market/toplists/toppctlosers", "."),
+        TOPLISTS_ACTIVE(TK_HOST + "market/toplists/topactive", "."),
+        TOPLISTS_GAINERS_DOLLAR_AMT(TK_HOST + "market/toplists/topgainers", "."),
         TOPLISTS_GAINERS_PERCENTAGE(
-                "https://api.tradeking.com/v1/market/toplists/toppctgainers", "."),
+                TK_HOST + "market/toplists/toppctgainers", "."),
         TOPLISTS_GAINERS_ACTIVE_DOLLAR_AMT(
-                "https://api.tradeking.com/v1/market/toplists/topactivegainersbydollarvalue", ".");
+                TK_HOST + "market/toplists/topactivegainersbydollarvalue", ".");
 
         private String[] urlStrings;
 
@@ -361,7 +362,7 @@ public class APICall implements Serializable {
     }
 
     public enum MEMBER {
-        PROFILE("https://api.tradeking.com/v1/member/profile", ".");
+        PROFILE(TK_HOST + "member/profile", ".");
 
         private String[] urlStrings;
 
@@ -413,8 +414,8 @@ public class APICall implements Serializable {
     }
 
     public enum UTILITY {
-        STATUS("https://api.tradeking.com/v1/utility/status", "."),
-        VERSION("https://api.tradeking.com/v1/utility/version", ".");
+        STATUS(TK_HOST + "utility/status", "."),
+        VERSION(TK_HOST + "utility/version", ".");
 
         private String[] urlStrings;
 
@@ -470,14 +471,14 @@ public class APICall implements Serializable {
     }
 
     public enum WATCHLIST {
-        GET_WATCHLISTS(Verb.GET, "https://api.tradeking.com/v1/watchlists", "."),
-        POST_WATCHLISTS(Verb.POST, "https://api.tradeking.com/v1/watchlists", "."),
-        GET_WATCHLIST_ID(Verb.GET, "https://api.tradeking.com/v1/watchlists/", "", "."),
-        DELETE_WATCHLISTS_ID(Verb.DELETE, "https://api.tradeking.com/v1/watchlists/", "", "."),
+        GET_WATCHLISTS(Verb.GET, TK_HOST + "watchlists", "."),
+        POST_WATCHLISTS(Verb.POST, TK_HOST + "watchlists", "."),
+        GET_WATCHLIST_ID(Verb.GET, TK_HOST + "watchlists/", "", "."),
+        DELETE_WATCHLISTS_ID(Verb.DELETE, TK_HOST + "watchlists/", "", "."),
         POST_SYMBOL_WATCHLIST_ID(
-                Verb.POST, "https://api.tradeking.com/v1/watchlist/", "/symbols", "."),
+                Verb.POST, TK_HOST + "watchlist/", "/symbols", "."),
         DELETE_SYMBOL_WATCHLIST(
-                Verb.DELETE, "https://api.tradeking.com/v1/watchlists/", "/", ".", "");
+                Verb.DELETE, TK_HOST + "watchlists/", "/", ".", "");
 
         private String[] urlStrings;
         private Verb verb;
