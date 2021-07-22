@@ -221,9 +221,13 @@ public class TradeKing {
   static void testOrder(TradeKing tk) {
 		FIXMLBuilder fixml = new FIXMLBuilder()
 			.id(ForemanConstants.TK_ACCOUNT_NO.toString())
-			.timeInForce(TimeInForceField.DAY_ORDER) .symbol("TWTR")
-			.priceType(PriceType.LIMIT) .securityType(SecurityType.STOCK) .quantity(1)
-			.executionPrice(.01) .side(MarketSideField.BUY);
+			.timeInForce(TimeInForceField.DAY_ORDER)
+      .symbol("TWTR")
+			.priceType(PriceType.LIMIT)
+      .securityType(SecurityType.STOCK)
+      .quantity(1)
+			.executionPrice(.01)
+      .side(MarketSideField.BUY);
     String payload = fixml.build().toString();
 		System.err.println(payload);
     OrderResponse o = tk.preview(ForemanConstants.TK_ACCOUNT_NO.toString(), payload);
@@ -233,11 +237,9 @@ public class TradeKing {
 		
 		AccountsResponse a = tk.accounts(); log(a);
 		
-    /*
-		QuotesResponse q = tk.quotes("TWTR", "XIV"); log(q);
+		QuotesResponse q = tk.quotes(new String[] {"TWTR", "XIV"}); log(q);
 		
-		Future f = tk.quotes(handler, "TWTR", "XIV"); wait(f, 15000L);
-    */
+		// Future f = tk.quotes(handler, "TWTR", "XIV"); wait(f, 15000L);
 	}
 
 	/**
